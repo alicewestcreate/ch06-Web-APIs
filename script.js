@@ -4,9 +4,113 @@
 // -------------------------------------------------------
 
 
-let timeEl = document.getElementById("time")
+// Global Variable
+// Questions. This is an array of objects. Each object has a value of a question, 4 choices and 1 correct answer. 
+const questions = [
+    // { question: "What does API stand for", 
+    //     choices: ["Application Programming Interface", "Academic Performance Index", "Active Pharmaceutical Ingredients", "American Petroleum Institue"],
+    //     answer: "Application Programming Interface",
+    // },
+    { question: "What does API stand for", 
+    choices: [["Application Programming Interface", true], ["Academic Performance Index", false], ["Active Pharmaceutical Ingredients", false], ["American Petroleum Institue", false]]
+    },
+    { question: "This is question two", 
+    choices: ["Answer1", "Answer2", "Answer3", "Answer4"],
+    answer: "Answer2",
+}
+]
 
-let startButton = document.getElementById("start")
+
+
+// HTML Variables:
+
+// Get the items inside the timer and start div
+let timeEl = document.getElementById("time") // timer Element
+let startButton = document.getElementById("start") // the button that starts the game
+
+
+// Question Div - Itens 
+let questionDIV = document.querySelector("#questions") // the questions container
+let questionTitleEl = document.querySelector("#question-title") // the h2 element to display the question
+let question = questions[0].question // variable to hold the question information from the object.
+questionTitleEl.textContent = question // setting the innter html to equal the value of question
+
+
+let choiceList = document.querySelector("#choice-list") //Get the ordered List item, choiceList
+let choiceItem = choiceList.querySelectorAll('li') // Gets all of the list items inside choiceList
+let choiceButtons = choiceList.querySelectorAll('button') // Gets all of the list items inside choiceList
+
+
+
+// Make the innerHTML of each item = the corrosponding object index. 
+choiceItem[0].innerHTML = questions[0].choices[0][0]
+choiceItem[1].innerHTML = questions[0].choices[1][0]
+choiceItem[2].innerHTML = questions[0].choices[2][0]
+choiceItem[3].innerHTML = questions[0].choices[3][0]
+
+// Assign new variable for each of the innerhtml updates 
+let choice1Content = choiceItem[0].innerHTML
+let choice2Content = choiceItem[1].innerHTML
+let choice3Content = choiceItem[2].innerHTML
+let choice4Content = choiceItem[3].innerHTML
+
+// When the button is pressed, check if the questions[0].choices[0][1] = true, if true, its correct. else its wrong.
+
+console.log(choiceButtons)
+
+
+// For each button, inside choiceButtons 
+choiceButtons.forEach(element => {
+    element.addEventListener("click", ()=> {
+        console.log(questions[0].choices[0][1])
+        console.log(element)
+        // if (element ===)
+    }) 
+});
+
+
+
+
+
+
+
+// Create a new element inside question div 
+
+
+// // creating the text and storing in variable
+
+
+// console.log(choice)
+
+
+// addach the new text to the new element
+
+// find the ostion where the new e;e,emt sjpi;d ne added
+
+// isert the new element into its psotion 
+
+
+
+
+
+
+// Items to get:
+// Get #timeSpan - this will display the timer
+
+// Get #start-screen - change class from start to hide 
+
+// Get #questions - change class from hide to TBC
+    // Get #question-title   - this will display each question
+    // Get choices - this will display the possible choices 
+
+// Get #end-screen - remove hide 
+    // Get  #final-score - input the score 
+    // Get submit - get the value of the input and store somewhere? 
+
+// Create & get feedback tag. this will display wrong or correct
+
+
+
 
 
 
@@ -16,6 +120,10 @@ startButton.addEventListener("click", ()=>{
     // hide startScreenDiv from page
     let startScreenDiv = document.querySelector("#start-screen")
     startScreenDiv.classList.add("hide")
+    
+    let questionsDiv = document.querySelector("#questions")
+    questionsDiv.classList.remove("hide")
+
 
     // start by putting something on the screen
     // remove div 'questions' class of hide
@@ -48,20 +156,7 @@ let startTimer = function() {
 
 
 
-// Items to get:
-// Get #timeSpan - this will display the timer
 
-// Get #start-screen - change class from start to hide 
-
-// Get #questions - change class from hide to TBC
-    // Get #question-title   - this will display each question
-    // Get choices - this will display the possible choices 
-
-// Get #end-screen - remove hide 
-    // Get  #final-score - input the score 
-    // Get submit - get the value of the input and store somewhere? 
-
-// Create & get feedback tag. this will display wrong or correct
 
 
 
@@ -157,24 +252,6 @@ let startTimer = function() {
 
 */
 
-const questions = [
-    { question: "This is question one", 
-        answers: ["Answer1", "Answer2", "Answer3", "Answer4"],
-        correct: "Answer2",
-    },
-    { question: "This is question two", 
-    answers: ["Answer1", "Answer2", "Answer3", "Answer4"],
-    correct: "Answer2",
-}
-]
-
-
-
-
-// console.log(questions)
-console.log(Object.values(questions[0].answers[0]))
-console.log(questions[0])
-console.log(questions[1])
 
     // A list of objects?
         // Question: Value
