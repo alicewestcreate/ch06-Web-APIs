@@ -7,19 +7,21 @@
 // Global Variable
 // Questions. This is an array of objects. Each object has a value of a question, 4 choices and 1 correct answer. 
 const questions = [
-    // { question: "What does API stand for", 
-    //     choices: ["Application Programming Interface", "Academic Performance Index", "Active Pharmaceutical Ingredients", "American Petroleum Institue"],
-    //     answer: "Application Programming Interface",
-    // },
     { question: "What does API stand for", 
-    choices: [["Application Programming Interface", true], ["Academic Performance Index", false], ["Active Pharmaceutical Ingredients", false], ["American Petroleum Institue", false]]
+        choice: ["Application Programming Interface", "Academic Performance Index", "Active Pharmaceutical Ingredients", "American Petroleum Institue"],
+        answer: "Application Programming Interface",
     },
-    { question: "This is question two", 
-    choices: ["Answer1", "Answer2", "Answer3", "Answer4"],
-    answer: "Answer2",
-}
+    { question: "What does BBC stand for", 
+    choice: ["Application Programming Interface", "Academic Performance Index", "Active Pharmaceutical Ingredients", "American Petroleum Institue"],
+    answer: "Application Programming Interface",
+    },
+//     { question: "What does API stand for", 
+//     choice: [["Application Programming Interface", true], ["Academic Performance Index", false], ["Active Pharmaceutical Ingredients", false], ["American Petroleum Institue", false]]
+//     },
+//     { question: "What does BP stand for", 
+//     choice: [["brifgfg", true], ["fgfee", false], ["Agdfgfdgf", false], ["fgfdgd", false]]
+//     },
 ]
-
 
 
 // HTML Variables:
@@ -37,16 +39,22 @@ questionTitleEl.textContent = question // setting the innter html to equal the v
 
 
 let choiceList = document.querySelector("#choice-list") //Get the ordered List item, choiceList
-let choiceItem = choiceList.querySelectorAll('li') // Gets all of the list items inside choiceList
-let choiceButtons = choiceList.querySelectorAll('button') // Gets all of the list items inside choiceList
+let choiceItem = choiceList.querySelectorAll('button') // Gets all of the list items inside choiceList
 
+
+
+
+let feedbackEl = document.querySelector("#feedback")
+let feedbackContent = ""
+feedbackEl.innerHTML = feedbackContent
 
 
 // Make the innerHTML of each item = the corrosponding object index. 
-choiceItem[0].innerHTML = questions[0].choices[0][0]
-choiceItem[1].innerHTML = questions[0].choices[1][0]
-choiceItem[2].innerHTML = questions[0].choices[2][0]
-choiceItem[3].innerHTML = questions[0].choices[3][0]
+// This is the first question. 
+choiceItem[0].innerHTML = questions[0].choice[0]
+choiceItem[1].innerHTML = questions[0].choice[1]
+choiceItem[2].innerHTML = questions[0].choice[2]
+choiceItem[3].innerHTML = questions[0].choice[3]
 
 // Assign new variable for each of the innerhtml updates 
 let choice1Content = choiceItem[0].innerHTML
@@ -54,19 +62,59 @@ let choice2Content = choiceItem[1].innerHTML
 let choice3Content = choiceItem[2].innerHTML
 let choice4Content = choiceItem[3].innerHTML
 
-// When the button is pressed, check if the questions[0].choices[0][1] = true, if true, its correct. else its wrong.
 
-console.log(choiceButtons)
+
+questions.forEach(element => {
+    console.log("For each", element)
+
+});
+
+
+
+
+// let answer = questions[0].answer
+// console.log(answer)
+
+
+// When the button is pressed, check if the questions[0].choices[0][1] = true, if true, its correct. else its wrong.
+console.log(choiceItem)
+
+let buttonClickFunction = function(event) {
+
+    showFeedback()
+
+    let clickedButton = event.target.innerHTML
+    let answer = questions[0].answer
+
+    if (clickedButton === answer) {
+        feedbackContent = "Correct"
+        feedbackEl.innerHTML = feedbackContent
+    } else {
+        feedbackContent = "Wrong"
+        feedbackEl.innerHTML = feedbackContent
+    }
+ 
+}
+
+let showFeedback = function() {
+    let feedback = document.querySelector("#feedback")
+    feedback.classList.remove("hide")
+}
+
+
+// Creatr an event listen for the choiceList
+choiceList.addEventListener("click", buttonClickFunction)
+
 
 
 // For each button, inside choiceButtons 
-choiceButtons.forEach(element => {
-    element.addEventListener("click", ()=> {
-        console.log(questions[0].choices[0][1])
-        console.log(element)
-        // if (element ===)
-    }) 
-});
+// choiceButtons.forEach(element => {
+//     element.addEventListener("click", ()=> {
+//         console.log(questions[0].choices[0][1])
+//         console.log(element)
+//         // if (element ===)
+//     }) 
+// });
 
 
 
