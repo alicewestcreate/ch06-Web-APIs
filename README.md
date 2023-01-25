@@ -16,4 +16,6 @@ I became more disciplined in finishing my pseudo-coding before attempting to wri
 
 Became more comfortable with functions and ensuring only one task per function. 
 
+## Preview of API
 
+![ alt](/assets/Screen-Shot-Application.png)
