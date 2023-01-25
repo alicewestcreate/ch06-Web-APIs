@@ -175,5 +175,4 @@ choiceItem[0].addEventListener("click", choiceMade)
 choiceItem[1].addEventListener("click", choiceMade)
 choiceItem[2].addEventListener("click", choiceMade)
 choiceItem[3].addEventListener("click", choiceMade)
-
 submitButton.addEventListener("click", storeScore)
