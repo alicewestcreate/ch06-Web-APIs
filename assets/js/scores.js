@@ -3,13 +3,28 @@
 
 const wrapperEl = document.querySelector(".wrapper")
 const highScoresContainer = document.querySelector("#highscores")
-const listItem = document.createElement("li")
-
-const listItemContent = JSON.parse(localStorage.getItem("entry"))
-
-listItem.innerHTML = listItemContent
+const clearButton = document.querySelector("#clear")
 
 
+const entriesArray = JSON.parse(localStorage.getItem("entries"))
+
+entriesArray.forEach(entry => {
+    const listItem = document.createElement("li")
+    listItem.innerHTML = "Name: " + entry.name + " | Score : " + entry.score
+    highScoresContainer.appendChild(listItem)
+    
+});
+
+const clearStorage = function(){
+    localStorage.removeItem("entries")
+    highScoresContainer.classList.add("hide")
 
 
-highScoresContainer.appendChild(listItem)
+}
+
+
+clearButton.addEventListener("click", clearStorage)
+
+
+
+

@@ -24,7 +24,6 @@ let feedbackEl = document.querySelector("#feedback")
 
 
 
-
 // -------------------------------------------------------
 //                      GLOBAL VARIABLES
 // -------------------------------------------------------
@@ -35,13 +34,6 @@ let questionsAnswered = 0
 let scoreCounter = 0
 let time = 0 
 let initialsValue = initials.value
-
-
-
-
-
-
-
 
 
 
@@ -137,14 +129,17 @@ let finalScore = function () {
 
 let storeScore = function (event) {
     event.preventDefault()
+
+    // Get items from local storage
+    let entries = JSON.parse(localStorage.getItem("entries")) || []
+
     let entry = {
         name: initials.value.trim(),
         score: scoreCounter,
       };    
-    // console.log("entry" , entry)
-    // console.log("name" , initials.value)
-    // console.log("score" , scoreCounter)
-    localStorage.setItem("entry", JSON.stringify(entry));
+
+    entries.push(entry)
+    localStorage.setItem("entries", JSON.stringify(entries));
     openHighScore()
 
 }
@@ -188,7 +183,9 @@ let runQuestion = function () {
 
 let choiceMade = function(event) {
     //This function checks the value of the chosen button and compares against the corrosponding answer.
-    let clickedButton = event.target.innerHTML
+    let clickedButton = event.target
+    console.log(event)
+    console.log(clickedButton)
     let answer = questions[i].answer
 
     if (clickedButton === answer) {
