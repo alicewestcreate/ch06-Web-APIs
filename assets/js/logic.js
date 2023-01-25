@@ -3,12 +3,12 @@
 // -------------------------------------------------------
 
 
-// Get the items inside the timer and start div
+// All items related the te
 let timeEl = document.getElementById("time") // timer Element
 let startButton = document.getElementById("start") // the button that starts the game
 
 
-// Question Div - Items
+// All variables related the QuestionsDiv.
 let questionDIV = document.querySelector("#questions") // the questions container
 let questionTitleEl = document.querySelector("#question-title") // the h2 element to display the question
 let choiceList = document.querySelector("#choice-list") //Get the ordered List item, choiceList
@@ -183,7 +183,7 @@ let runQuestion = function () {
 
 let choiceMade = function(event) {
     //This function checks the value of the chosen button and compares against the corrosponding answer.
-    let clickedButton = event.target
+    let clickedButton = event.target.innerHTML
     console.log(event)
     console.log(clickedButton)
     let answer = questions[i].answer
