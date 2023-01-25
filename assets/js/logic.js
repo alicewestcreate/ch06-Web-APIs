@@ -1,38 +1,3 @@
-
-
-
-
-// -------------------------------------------------------
-//                      QUESTIONS 
-// -------------------------------------------------------
-
-// Questions. This is an array of objects. Each object has a value of a question, 4 choices and 1 correct answer. 
-const questions = [
-    { question: "What does API stand for", 
-        choice: ["Application Programming Interface", "Academic Performance Index", "Active Pharmaceutical Ingredients", "American Petroleum Institue"],
-        answer: "Application Programming Interface",
-    },
-    { question: "How many legs does a spinder have", 
-    choice: ["One", "Hundred", "Twenty", "Eight"],
-    answer: "Eight",
-    },
-    { question: "What to Bees collect", 
-    choice: ["Honey", "Pollen", "Flowers", "Dust"],
-    answer: "Pollen",
-    },
-    { question: "What is square root for 64", 
-    choice: ["8", "5", "64", "3"],
-    answer: "8",
-    },
-    { question: "What is the opposite to down", 
-    choice: ["Up", "Left", "Right", "Nowhere"],
-    answer: "Up",
-    },
-
-]
-
-
-
 // -------------------------------------------------------
 //                    HTML VARIABLES
 // -------------------------------------------------------
@@ -47,7 +12,7 @@ let startButton = document.getElementById("start") // the button that starts the
 let questionDIV = document.querySelector("#questions") // the questions container
 let questionTitleEl = document.querySelector("#question-title") // the h2 element to display the question
 let choiceList = document.querySelector("#choice-list") //Get the ordered List item, choiceList
-let choiceItem = document.querySelectorAll("button") // Gets all of the list items inside choiceList
+let choiceItem = choiceList.querySelectorAll("button") // Gets all of the list items inside choiceList
 
 let endScreen = document.querySelector("#end-screen")
 let finalScoreEl = document.querySelector("#final-score")
@@ -56,23 +21,6 @@ let submitButton = document.querySelector("#submit")
 
 // Feedback Div items
 let feedbackEl = document.querySelector("#feedback") 
-
-
-
-// Items to get:
-// Get #timeSpan - this will display the timer
-
-// Get #start-screen - change class from start to hide 
-
-// Get #questions - change class from hide to TBC
-    // Get #question-title   - this will display each question
-    // Get choices - this will display the possible choices 
-
-// Get #end-screen - remove hide 
-    // Get  #final-score - input the score 
-    // Get submit - get the value of the input and store somewhere? 
-
-// Create & get feedback tag. this will display wrong or correct
 
 
 
@@ -86,6 +34,14 @@ let questionLength = questions.length
 let questionsAnswered = 0
 let scoreCounter = 0
 let time = 0 
+let initialsValue = initials.value
+
+
+
+
+
+
+
 
 
 
@@ -121,12 +77,8 @@ const showEndScreen = function() {
     feedback.classList.remove("hide")
 }
 
-// const hidewrapper = function() {
-//     let hidewrapper = document.querySelector(".clear")
-//     hidewrapper.classList.add("hide")
-// }
 
-// hidewrapper()
+
 
 
 // ------ Timer Functions ---------
@@ -183,20 +135,30 @@ let finalScore = function () {
     finalScoreEl.innerHTML = scoreCounter
 }
 
-
 let storeScore = function (event) {
     event.preventDefault()
-    window.open("highscores.html", "_self")
-    console.log(initials.value)
+    let entry = {
+        name: initials.value.trim(),
+        score: scoreCounter,
+      };    
+    // console.log("entry" , entry)
+    // console.log("name" , initials.value)
+    // console.log("score" , scoreCounter)
+    localStorage.setItem("entry", JSON.stringify(entry));
+    openHighScore()
 
 }
+
+let openHighScore = function (event) {
+    window.open("highscores.html", "_self")
+
+}
+
+
 
 // -------------------------------------------------------
 //                      MAIN FUNCTIONS
 // ------------------------------------------------------
-
-
-
 
 // Display next set of questions
 
@@ -222,7 +184,6 @@ let runQuestion = function () {
 
 }
 
-
 // Check the choicen element against answer key in object. 
 
 let choiceMade = function(event) {
@@ -242,7 +203,6 @@ let choiceMade = function(event) {
     }
 
     questionsAnswered ++
-    
     timeCheck()
     return time
 
@@ -255,7 +215,6 @@ let choiceMade = function(event) {
 //                        EVENT LISTENERS 
 // -------------------------------------------------------
 
-
  
 startButton.addEventListener("click", startQuiz) 
 
@@ -265,13 +224,9 @@ choiceList.addEventListener("click", choiceMade)
 submitButton.addEventListener("click", storeScore)
 
 
-
-
 // -------------------------------------------------------
 //                 HTML RETUNED VARIABLES
 // -------------------------------------------------------
-
-
 
 
 /* 
@@ -284,10 +239,6 @@ submitButton.addEventListener("click", storeScore)
 
 3. Set item 
 */
-
-
-
-
 
 
 // Load init function from Local Storage 
