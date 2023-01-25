@@ -47,7 +47,12 @@ let startButton = document.getElementById("start") // the button that starts the
 let questionDIV = document.querySelector("#questions") // the questions container
 let questionTitleEl = document.querySelector("#question-title") // the h2 element to display the question
 let choiceList = document.querySelector("#choice-list") //Get the ordered List item, choiceList
-let choiceItem = choiceList.querySelectorAll('button') // Gets all of the list items inside choiceList
+let choiceItem = choiceList.querySelectorAll("button") // Gets all of the list items inside choiceList
+
+let endScreen = document.querySelector("#end-screen")
+let finalScoreEl = document.querySelector("#final-score")
+let initials = document.querySelector("#initials")
+let submitButton = document.querySelector("#submit")
 
 // Feedback Div items
 let feedbackEl = document.querySelector("#feedback") 
@@ -79,7 +84,7 @@ let feedbackEl = document.querySelector("#feedback")
 
 let questionLength = questions.length
 let questionsAnswered = 0
-let correctAnswers = 0
+let scoreCounter = 0
 let time = 0 
 
 
@@ -90,12 +95,6 @@ let time = 0
 
 
 // ------ Display show/hide Functions ---------
-
-// displayStarterScreen(): 
-    // Calls displaySwitch()
-
-// displayFirstQuestion():
-    // Calls displaySwitch()
 
 const hideStartScreen = function(){
     let startScreenDiv = document.querySelector("#start-screen")
@@ -112,17 +111,36 @@ const hideQuestions = function(){
     questionsDiv.classList.add("hide")
 }
 
-// displayEndScreen():
-    // Calls displaySwitch()
+const showFeedback = function() {
+    let feedback = document.querySelector("#feedback")
+    feedback.classList.remove("hide")
+}
 
-// displaySwitch()
-        // This function switch a class from show or hide
-        // If show change to hide 
-        // else hide to show 
+const showEndScreen = function() {
+    let feedback = document.querySelector("#end-screen")
+    feedback.classList.remove("hide")
+}
+
+// const hidewrapper = function() {
+//     let hidewrapper = document.querySelector(".clear")
+//     hidewrapper.classList.add("hide")
+// }
+
+// hidewrapper()
 
 
 // ------ Timer Functions ---------
 
+
+// Start Quiz
+
+let startQuiz = function() {
+    // Once start button has been clicked, run all these functions. 
+    startTimer()
+    runQuestion()
+    hideStartScreen()
+    showQuestions()
+}
 
 
 let startTimer = function() {
@@ -138,48 +156,40 @@ let startTimer = function() {
         timeEl.textContent = time
         time--
     }, 1000)
+
+
     return time;
     
     // Then switch to endscreen()
 }
 
+let timeCheck = function() {
+
+    if (time <= 0){
+        endQuiz()
+    }
+    showFeedback()
+    runQuestion ()
+
+}
+
+let endQuiz = function() {
+    hideQuestions()
+    showEndScreen()
+    finalScore()
+}
+
+let finalScore = function () {
+    finalScoreEl.innerHTML = scoreCounter
+}
 
 
+let storeScore = function (event) {
+    event.preventDefault()
+    window.open("highscores.html", "_self")
+    console.log(initials.value)
 
-
-
-// timer() function: 
-        // It needs to start, minus X seconds, stop
-        // if timer == 0:
-            // end of game 
-
-
-// deductTimers function:
-        // Minus X amount of seconds from timer 
-
-
-// ------ Question Functions ---------
-    
-
-// questionCounter() function:
-    // This function counts number of questions answered
-
-        // let maxQuestions = false  
-        // let count = 0
-        // length = questions.length (might need to make this global)
-
-        // while count is > questions.length 
-            // maxQuestions == True
-        
-            // return maxQuestions
-         
-    
-// scoreCounter() function: 
-        // Count number of questions answered CORRECTLY. 
-
-
-
-
+}
 
 // -------------------------------------------------------
 //                      MAIN FUNCTIONS
@@ -187,15 +197,8 @@ let startTimer = function() {
 
 
 
-let startFunction = function() {
-    // Once start button has been clicked, run all these functions. 
-    startTimer()
-    runQuestion()
-    hideStartScreen()
-    showQuestions()
-}
 
-
+// Display next set of questions
 
 let i = -1 
 // the value of i iterates over each object found in the question array.
@@ -204,8 +207,9 @@ let i = -1
 let runQuestion = function () {
     while (true){
         i ++
+        // if i is greater than the length of question, break the loop. 
         if (i >= questionLength) {
-            hideQuestions()
+            endQuiz()
             break
         }
         questionTitleEl.innerHTML = questions[i].question
@@ -219,29 +223,7 @@ let runQuestion = function () {
 }
 
 
-
-// While timer is > 0 : 
-
-    // choiceButton - Onclick
-        // 1. CHECK 
-        // if button is True:
-            // add 1 to scoreCounter()
-        // else if button is False
-            // deductTimer()
-
-        // 2. NumberOfQuestions ++
-        
-        // 3. CHECK
-        // If timers() > 0 OR maxQuestion == False 
-            // displayNextQuestion() 
-            
-        // Else
-            // displayEndScreen()
-
-        // 4. Display previous feedback
-
-
-
+// Check the choicen element against answer key in object. 
 
 let choiceMade = function(event) {
     //This function checks the value of the chosen button and compares against the corrosponding answer.
@@ -250,7 +232,7 @@ let choiceMade = function(event) {
 
     if (clickedButton === answer) {
         feedbackContent = "Correct"
-        correctAnswers ++
+        scoreCounter ++
         feedbackEl.innerHTML = feedbackContent
 
     } else {
@@ -260,59 +242,27 @@ let choiceMade = function(event) {
     }
 
     questionsAnswered ++
-
-    if (time <= 0 || questionLength === questionsAnswered){
-        console.log("Outter questions")
-        console.log("3. question length",questionsAnswered)   
-        console.log(questionsAnswered)
-        console.log(correctAnswers)
-    }
-
-    showFeedback()
-    runQuestion ()
+    
+    timeCheck()
     return time
 
-
-
-    // if (time = 0) {
-    //     let questionsDiv = document.querySelector("#questions")
-    //     questionsDiv.classList.add("hide")
-    // } 
-
-    }
-
-    
-
-
- 
-
-let showFeedback = function() {
-    let feedback = document.querySelector("#feedback")
-    feedback.classList.remove("hide")
 }
 
 
 
 
-
 // -------------------------------------------------------
-//                        SCRIPT
+//                        EVENT LISTENERS 
 // -------------------------------------------------------
-
-
 
 
  
-startButton.addEventListener("click", startFunction) 
-
-
+startButton.addEventListener("click", startQuiz) 
 
 // Creatr an event listen for the choiceList
 choiceList.addEventListener("click", choiceMade)
 
-
-
-
+submitButton.addEventListener("click", storeScore)
 
 
 
