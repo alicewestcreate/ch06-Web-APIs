@@ -1,144 +1,61 @@
 
-// -------------------------------------------------------
-//                    HTML VARIABLES
-// -------------------------------------------------------
 
 
-// Global Variable
+
+// -------------------------------------------------------
+//                      QUESTIONS 
+// -------------------------------------------------------
+
 // Questions. This is an array of objects. Each object has a value of a question, 4 choices and 1 correct answer. 
 const questions = [
     { question: "What does API stand for", 
         choice: ["Application Programming Interface", "Academic Performance Index", "Active Pharmaceutical Ingredients", "American Petroleum Institue"],
         answer: "Application Programming Interface",
     },
-    { question: "What does BBC stand for", 
-    choice: ["Application Programming Interface", "Academic Performance Index", "Active Pharmaceutical Ingredients", "American Petroleum Institue"],
-    answer: "Application Programming Interface",
+    { question: "How many legs does a spinder have", 
+    choice: ["One", "Hundred", "Twenty", "Eight"],
+    answer: "Eight",
     },
-//     { question: "What does API stand for", 
-//     choice: [["Application Programming Interface", true], ["Academic Performance Index", false], ["Active Pharmaceutical Ingredients", false], ["American Petroleum Institue", false]]
-//     },
-//     { question: "What does BP stand for", 
-//     choice: [["brifgfg", true], ["fgfee", false], ["Agdfgfdgf", false], ["fgfdgd", false]]
-//     },
+    { question: "What to Bees collect", 
+    choice: ["Honey", "Pollen", "Flowers", "Dust"],
+    answer: "Pollen",
+    },
+    { question: "What is square root for 64", 
+    choice: ["8", "5", "64", "3"],
+    answer: "8",
+    },
+    { question: "What is the opposite to down", 
+    choice: ["Up", "Left", "Right", "Nowhere"],
+    answer: "Up",
+    },
+
 ]
 
 
-// HTML Variables:
+
+// -------------------------------------------------------
+//                    HTML VARIABLES
+// -------------------------------------------------------
+
 
 // Get the items inside the timer and start div
 let timeEl = document.getElementById("time") // timer Element
 let startButton = document.getElementById("start") // the button that starts the game
 
 
-// Question Div - Itens 
+// Question Div - Items
 let questionDIV = document.querySelector("#questions") // the questions container
 let questionTitleEl = document.querySelector("#question-title") // the h2 element to display the question
-let question = questions[0].question // variable to hold the question information from the object.
-questionTitleEl.textContent = question // setting the innter html to equal the value of question
-
-
 let choiceList = document.querySelector("#choice-list") //Get the ordered List item, choiceList
-let choiceItem = choiceList.querySelectorAll('button') // Gets all of the list items inside choiceList
+let choiceItem = choiceList.querySelectorAll("button") // Gets all of the list items inside choiceList
 
+let endScreen = document.querySelector("#end-screen")
+let finalScoreEl = document.querySelector("#final-score")
+let initials = document.querySelector("#initials")
+let submitButton = document.querySelector("#submit")
 
-
-
-let feedbackEl = document.querySelector("#feedback")
-let feedbackContent = ""
-feedbackEl.innerHTML = feedbackContent
-
-
-// Make the innerHTML of each item = the corrosponding object index. 
-// This is the first question. 
-choiceItem[0].innerHTML = questions[0].choice[0]
-choiceItem[1].innerHTML = questions[0].choice[1]
-choiceItem[2].innerHTML = questions[0].choice[2]
-choiceItem[3].innerHTML = questions[0].choice[3]
-
-// Assign new variable for each of the innerhtml updates 
-let choice1Content = choiceItem[0].innerHTML
-let choice2Content = choiceItem[1].innerHTML
-let choice3Content = choiceItem[2].innerHTML
-let choice4Content = choiceItem[3].innerHTML
-
-
-
-questions.forEach(element => {
-    console.log("For each", element)
-
-});
-
-
-
-
-// let answer = questions[0].answer
-// console.log(answer)
-
-
-// When the button is pressed, check if the questions[0].choices[0][1] = true, if true, its correct. else its wrong.
-console.log(choiceItem)
-
-let buttonClickFunction = function(event) {
-
-    showFeedback()
-
-    let clickedButton = event.target.innerHTML
-    let answer = questions[0].answer
-
-    if (clickedButton === answer) {
-        feedbackContent = "Correct"
-        feedbackEl.innerHTML = feedbackContent
-    } else {
-        feedbackContent = "Wrong"
-        feedbackEl.innerHTML = feedbackContent
-    }
- 
-}
-
-let showFeedback = function() {
-    let feedback = document.querySelector("#feedback")
-    feedback.classList.remove("hide")
-}
-
-
-// Creatr an event listen for the choiceList
-choiceList.addEventListener("click", buttonClickFunction)
-
-
-
-// For each button, inside choiceButtons 
-// choiceButtons.forEach(element => {
-//     element.addEventListener("click", ()=> {
-//         console.log(questions[0].choices[0][1])
-//         console.log(element)
-//         // if (element ===)
-//     }) 
-// });
-
-
-
-
-
-
-
-// Create a new element inside question div 
-
-
-// // creating the text and storing in variable
-
-
-// console.log(choice)
-
-
-// addach the new text to the new element
-
-// find the ostion where the new e;e,emt sjpi;d ne added
-
-// isert the new element into its psotion 
-
-
-
+// Feedback Div items
+let feedbackEl = document.querySelector("#feedback") 
 
 
 
@@ -160,63 +77,15 @@ choiceList.addEventListener("click", buttonClickFunction)
 
 
 
-
-
-startButton.addEventListener("click", ()=>{
-    // Start countdown timer
-    startTimer()
-    // hide startScreenDiv from page
-    let startScreenDiv = document.querySelector("#start-screen")
-    startScreenDiv.classList.add("hide")
-    
-    let questionsDiv = document.querySelector("#questions")
-    questionsDiv.classList.remove("hide")
-
-
-    // start by putting something on the screen
-    // remove div 'questions' class of hide
-})
-
-
-let time = 5  // Update code for time to equal questions.length x 15 seconds 
-
-let startTimer = function() {
-    // startTimer function, starts a countDown function, which will minus 1 from time until time = 0
-    // if time = 0, clear the interval timer
-    let countDown = setInterval(function() {     
-        if (time <= 0) {
-            // if there is no time left, clearInterval
-            clearInterval(countDown)
-        }
-        // this set the text content of the time element to the value of time. 
-        timeEl.textContent = time
-        time--
-    }, 1000)
-    // Then switch to endscreen()
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // -------------------------------------------------------
 //                      GLOBAL VARIABLES
 // -------------------------------------------------------
 
 
-// CorrectAnswers = 0
-
-// NumberOfQuestions = 0
+let questionLength = questions.length
+let questionsAnswered = 0
+let scoreCounter = 0
+let time = 0 
 
 
 
@@ -227,56 +96,100 @@ let startTimer = function() {
 
 // ------ Display show/hide Functions ---------
 
-// displayStarterScreen(): 
-    // Calls displaySwitch()
+const hideStartScreen = function(){
+    let startScreenDiv = document.querySelector("#start-screen")
+    startScreenDiv.classList.add("hide")
+}
 
-// displayFirstQuestion():
-    // Calls displaySwitch()
+const showQuestions = function(){
+    let questionsDiv = document.querySelector("#questions")
+    questionsDiv.classList.remove("hide")
+}   
 
-// displayEndScreen():
-    // Calls displaySwitch()
+const hideQuestions = function(){
+    let questionsDiv = document.querySelector("#questions")
+    questionsDiv.classList.add("hide")
+}
 
-// displaySwitch()
-        // This function switch a class from show or hide
-        // If show change to hide 
-        // else hide to show 
+const showFeedback = function() {
+    let feedback = document.querySelector("#feedback")
+    feedback.classList.remove("hide")
+}
+
+const showEndScreen = function() {
+    let feedback = document.querySelector("#end-screen")
+    feedback.classList.remove("hide")
+}
+
+// const hidewrapper = function() {
+//     let hidewrapper = document.querySelector(".clear")
+//     hidewrapper.classList.add("hide")
+// }
+
+// hidewrapper()
 
 
 // ------ Timer Functions ---------
 
 
-// timer() function: 
-        // It needs to start, minus X seconds, stop
-        // if timer == 0:
-            // end of game 
+// Start Quiz
+
+let startQuiz = function() {
+    // Once start button has been clicked, run all these functions. 
+    startTimer()
+    runQuestion()
+    hideStartScreen()
+    showQuestions()
+}
 
 
-// deductTimers function:
-        // Minus X amount of seconds from timer 
+let startTimer = function() {
+    // startTimer function, starts a countDown function, which will minus 1 from time until time = 0
+    // if time = 0, clear the interval timer
+    time = 15 * questionLength 
+    let countDown = setInterval(function() {     
+        if (time <= 0) {
+            // if there is no time left, clearInterval
+            clearInterval(countDown)
+        }
+        // this set the text content of the time element to the value of time. 
+        timeEl.textContent = time
+        time--
+    }, 1000)
 
 
-// ------ Question Functions ---------
+    return time;
     
+    // Then switch to endscreen()
+}
 
-// questionCounter() function:
-    // This function counts number of questions answered
+let timeCheck = function() {
 
-        // let maxQuestions = false  
-        // let count = 0
-        // length = questions.length (might need to make this global)
+    if (time <= 0){
+        endQuiz()
+    }
+    showFeedback()
+    runQuestion ()
 
-        // while count is > questions.length 
-            // maxQuestions == True
-        
-            // return maxQuestions
-         
-    
-// scoreCounter() function: 
-        // Count number of questions answered CORRECTLY. 
+}
+
+let endQuiz = function() {
+    hideQuestions()
+    showEndScreen()
+    finalScore()
+}
+
+let finalScore = function () {
+    finalScoreEl.innerHTML = scoreCounter
+}
 
 
+let storeScore = function (event) {
+    event.preventDefault()
+    window.open("highscores.html", "_self")
+    console.log(initials.value)
 
-
+}
 
 // -------------------------------------------------------
 //                      MAIN FUNCTIONS
@@ -284,74 +197,72 @@ let startTimer = function() {
 
 
 
-// displayNextQuestion() function: 
-    // Each time choiceButton is clicked
-        // Display next question for list.     
+
+// Display next set of questions
+
+let i = -1 
+// the value of i iterates over each object found in the question array.
+//  exmplain that i needs to be -1 one, so that the value of i in both runquestion and choiceMade are the same. 
+
+let runQuestion = function () {
+    while (true){
+        i ++
+        // if i is greater than the length of question, break the loop. 
+        if (i >= questionLength) {
+            endQuiz()
+            break
+        }
+        questionTitleEl.innerHTML = questions[i].question
+        choiceItem[0].innerHTML = questions[i].choice[0]
+        choiceItem[1].innerHTML = questions[i].choice[1]
+        choiceItem[2].innerHTML = questions[i].choice[2]
+        choiceItem[3].innerHTML = questions[i].choice[3]
+        break
+    }
+
+}
 
 
-// question varible
-// Erich's example: array of objects
-/*  
-    const questions = [
-        {question: 'This is q1', answers: [a1, a2, a3, a4], correct: a2},
-        {question: 'This is q2', answers: [a1, a2, a3, a4], correct: a4},
+// Check the choicen element against answer key in object. 
 
-    ]
+let choiceMade = function(event) {
+    //This function checks the value of the chosen button and compares against the corrosponding answer.
+    let clickedButton = event.target.innerHTML
+    let answer = questions[i].answer
 
-*/
+    if (clickedButton === answer) {
+        feedbackContent = "Correct"
+        scoreCounter ++
+        feedbackEl.innerHTML = feedbackContent
 
+    } else {
+        feedbackContent = "Wrong"
+        feedbackEl.innerHTML = feedbackContent
+        time = time - 15
+    }
 
-    // A list of objects?
-        // Question: Value
-        // Answer: Value 
-        // Wrong1: Value
-        // Wrong2: Value
-        // Wrong3: Value
-    // Or Nested List: 
-        // i[0] - Question 
-        // i[1] - Answer
-        // i[2] - Wrong
-        // i[3] - Wrong
-        // i[4] - Wrong
-
-
-
-
-
-
-// -------------------------------------------------------
-//                        SCRIPT
-// -------------------------------------------------------
-
-
-
-    // startButton-Onclick
-        // timer() function called 
-        // displaySwitch()- hide Starter Div
-        // displaySwitch()- show Question Div
-        // displayFirstQuestion()
-
-// While timer is > 0 : 
-
-    // choiceButton - Onclick
-        // 1. CHECK 
-        // if button is True:
-            // add 1 to scoreCounter()
-        // else if button is False
-            // deductTimer()
-
-        // 2. NumberOfQuestions ++
-        
-        // 3. CHECK
-        // If timers() > 0 OR maxQuestion == False 
-            // displayNextQuestion() 
-            
-        // Else
-            // displayEndScreen()
-
-        // 4. Display previous feedback
+    questionsAnswered ++
     
+    timeCheck()
+    return time
 
+}
+
+
+
+
+// -------------------------------------------------------
+//                        EVENT LISTENERS 
+// -------------------------------------------------------
+
+
+ 
+startButton.addEventListener("click", startQuiz) 
+
+// Creatr an event listen for the choiceList
+choiceList.addEventListener("click", choiceMade)
+
+submitButton.addEventListener("click", storeScore)
 
 
 
