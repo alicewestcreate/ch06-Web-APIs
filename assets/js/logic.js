@@ -34,6 +34,13 @@ let questionLength = questions.length
 let questionsAnswered = 0
 let scoreCounter = 0
 let time = 0 
+let initialsValue = initials.value
+
+
+
+
+
+
 
 
 
@@ -130,8 +137,20 @@ let finalScore = function () {
 
 let storeScore = function (event) {
     event.preventDefault()
+    let entry = {
+        name: initials.value.trim(),
+        score: scoreCounter,
+      };    
+    // console.log("entry" , entry)
+    // console.log("name" , initials.value)
+    // console.log("score" , scoreCounter)
+    localStorage.setItem("entry", JSON.stringify(entry));
+    openHighScore()
+
+}
+
+let openHighScore = function (event) {
     window.open("highscores.html", "_self")
-    console.log(initials.value)
 
 }
 
