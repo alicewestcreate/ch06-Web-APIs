@@ -3,12 +3,12 @@
 // -------------------------------------------------------
 
 
-// Get the items inside the timer and start div
+// All items related the te
 let timeEl = document.getElementById("time") // timer Element
 let startButton = document.getElementById("start") // the button that starts the game
 
 
-// Question Div - Items
+// All variables related the QuestionsDiv.
 let questionDIV = document.querySelector("#questions") // the questions container
 let questionTitleEl = document.querySelector("#question-title") // the h2 element to display the question
 let choiceList = document.querySelector("#choice-list") //Get the ordered List item, choiceList
@@ -24,7 +24,6 @@ let feedbackEl = document.querySelector("#feedback")
 
 
 
-
 // -------------------------------------------------------
 //                      GLOBAL VARIABLES
 // -------------------------------------------------------
@@ -35,13 +34,6 @@ let questionsAnswered = 0
 let scoreCounter = 0
 let time = 0 
 let initialsValue = initials.value
-
-
-
-
-
-
-
 
 
 
@@ -137,14 +129,17 @@ let finalScore = function () {
 
 let storeScore = function (event) {
     event.preventDefault()
+
+    // Get items from local storage
+    let entries = JSON.parse(localStorage.getItem("entries")) || []
+
     let entry = {
         name: initials.value.trim(),
         score: scoreCounter,
       };    
-    // console.log("entry" , entry)
-    // console.log("name" , initials.value)
-    // console.log("score" , scoreCounter)
-    localStorage.setItem("entry", JSON.stringify(entry));
+
+    entries.push(entry)
+    localStorage.setItem("entries", JSON.stringify(entries));
     openHighScore()
 
 }
@@ -189,6 +184,8 @@ let runQuestion = function () {
 let choiceMade = function(event) {
     //This function checks the value of the chosen button and compares against the corrosponding answer.
     let clickedButton = event.target.innerHTML
+    console.log(event)
+    console.log(clickedButton)
     let answer = questions[i].answer
 
     if (clickedButton === answer) {
