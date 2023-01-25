@@ -2,7 +2,7 @@
 A timed, multiple-choice coding quiz that can keeps track of high scores and quiz-takers' initials.
 
 
-## Movtivation For Project
+## Motivation For Project
 
 To demonstrate my understanding of how to extract and input data along with dynamically updating html tags and css attributes. 
 
